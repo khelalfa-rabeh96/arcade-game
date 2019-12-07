@@ -19,7 +19,7 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     this.x += this.speed * dt;
-    
+
     if(this.x > 550){
         this.x = -140;
         console.log("Out of the box");
@@ -46,7 +46,14 @@ Player = function(posX, posY){
 
 
 Player.prototype.update = function() {
-
+    // If the player reach to the water reset it's position
+    if(this.y <= -15){
+        var $this = this;
+        setTimeout(function(){
+            $this.resetPosition();
+        }, 400);
+        
+    }
 };
 
 // Draw the player on the screen
@@ -66,6 +73,7 @@ Player.prototype.handleInput = function(keyup){
 
     if(keyup == 'up' && this.y > 0){
         this.y -= 83;
+        console.log(this.y);
     }
 
      if(keyup == 'down' && this.y < 370){
