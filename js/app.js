@@ -59,6 +59,9 @@ var e1 = new Enemy(10, 60, 200),
     e3 = new Enemy(10, 300, 200);
 var allEnemies = [e1, e2, e3];
 
+var player = new Player(400, 400);
+console.log(player);
+
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
