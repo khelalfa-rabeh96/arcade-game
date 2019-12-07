@@ -18,6 +18,7 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    
 
    
 };
@@ -35,8 +36,10 @@ Enemy.prototype.render = function() {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-
-
+var e1 = new Enemy(10, 60, 200),
+    e2 = new Enemy(10, 180, 200),
+    e3 = new Enemy(10, 300, 200);
+var allEnemies = [e1, e2, e3];
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
