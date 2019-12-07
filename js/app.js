@@ -46,6 +46,9 @@ Player.prototype.update = function() {
     
 };
 
+Player.prototype.render = function() {
+    Enemy.prototype.render.call(this);
+};
 
 
 // Now instantiate your objects.
