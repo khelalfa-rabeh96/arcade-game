@@ -43,13 +43,31 @@ Player = function(posX, posY){
 }
 
 Player.prototype.update = function() {
-    
+
 };
 
 Player.prototype.render = function() {
     Enemy.prototype.render.call(this);
 };
 
+Player.prototype.handleInput = function(keyup){
+    if(keyup == 'left' && this.x > 0){
+        this.x -= 101;
+    }
+
+    if(keyup == 'right' && this.x < 305){
+        this.x += 101;
+    }
+
+    if(keyup == 'up' && this.y > 0){
+        this.y -= 83;
+    }
+
+     if(keyup == 'down' && this.y < 370){
+        this.y += 83;
+    }
+
+};
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
