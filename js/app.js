@@ -25,6 +25,15 @@ Enemy.prototype.update = function(dt) {
         console.log("Out of the box");
     }
 
+    // Reset the player postion when he collides with a player
+    if((player.x -60 <= this.x &&  this.x <= player.x+60 ) && (player.y -60 <= this.y &&  this.y <= player.y+60)){
+        
+        setTimeout(function(){
+            player.resetPosition();
+        }, 100);
+    }
+   
+
    
 };
 
@@ -91,12 +100,12 @@ Player.prototype.resetPosition = function(){
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-var e1 = new Enemy(10, 60, 200),
-    e2 = new Enemy(10, 180, 200),
-    e3 = new Enemy(10, 300, 200);
+var e1 = new Enemy(10, 58, 200),
+    e2 = new Enemy(10, 141, 200),
+    e3 = new Enemy(10, 224, 200);
 var allEnemies = [e1, e2, e3];
 
-var player = new Player(200, 400);
+var player = new Player(200, 390);
 console.log(player);
 
 
