@@ -19,7 +19,7 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     this.x += this.speed * dt;
-
+    
     if(this.x > 550){
         this.x = -140;
         console.log("Out of the box");
@@ -36,20 +36,25 @@ Enemy.prototype.render = function() {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
+
+// Player Class
 Player = function(posX, posY){
     this.sprite = 'images/char-boy.png';
     this.x = posX;
     this.y = posY;
 }
 
+
 Player.prototype.update = function() {
 
 };
 
+// Draw the player on the screen
 Player.prototype.render = function() {
     Enemy.prototype.render.call(this);
 };
 
+// Fucntion to handle the key input event and move the player
 Player.prototype.handleInput = function(keyup){
     if(keyup == 'left' && this.x > 0){
         this.x -= 101;
@@ -69,6 +74,7 @@ Player.prototype.handleInput = function(keyup){
 
 };
 
+// Function to reset the player to the initial postion
 Player.prototype.resetPosition = function(){
     this.x = 200;
     this.y = 400;
