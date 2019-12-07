@@ -42,6 +42,10 @@ Player = function(posX, posY){
     this.y = posY;
 }
 
+Player.prototype.update = function() {
+    
+};
+
 
 
 // Now instantiate your objects.
