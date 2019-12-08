@@ -1,3 +1,17 @@
 body {
     text-align: center;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#scoreLives{
+    color: royalblue;
+    padding: 10px 0;
+    position: absolute;
+    left:30px;
+    top:50px;
+}
+
+#scoreLives #score{
+    font-weight: bold;
+    color: #e63737;
 }

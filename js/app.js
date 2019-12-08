@@ -1,4 +1,5 @@
 // Enemies our player must avoid
+var scoreContainer = document.getElementById('score');
 var Enemy = function(posX, posY, speed) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
@@ -23,8 +24,6 @@ Enemy.prototype.update = function(dt) {
     if(this.x > 550){
         this.x = -140;
         this.speed  = 300 + randomAdditionalSpeed();
-        console.log("Out of the box");
-        console.log(this.speed);
     }
 
     // Reset the player postion when he collides with a player
@@ -32,6 +31,7 @@ Enemy.prototype.update = function(dt) {
         
         setTimeout(function(){
             player.resetPosition();
+            player.resetScore();
         }, 200);
     }
    
@@ -53,6 +53,8 @@ Player = function(posX, posY){
     this.sprite = 'images/char-boy.png';
     this.x = posX;
     this.y = posY;
+    this.maxUp = posY;
+    this.score = 0;
 }
 
 
@@ -85,6 +87,12 @@ Player.prototype.handleInput = function(keyup){
     if(keyup == 'up' && this.y > 0){
         this.y -= 83;
         console.log(this.y);
+        console.log(this.maxUp);
+        if(this.y <= 224 && this.y < this.maxUp){
+           player.addScore(10);
+           this.maxUp = this.y; 
+        }
+        
     }
 
      if(keyup == 'down' && this.y < 370){
@@ -96,8 +104,19 @@ Player.prototype.handleInput = function(keyup){
 // Function to reset the player to the initial postion
 Player.prototype.resetPosition = function(){
     this.x = 200;
-    this.y = 400;
+    this.y = 390;
+    this.maxUp = this.y;
 } 
+
+Player.prototype.addScore = function(someScore) {
+    this.score += someScore;
+    scoreContainer.textContent = ''+ this.score;
+};
+
+Player.prototype.resetScore = function() {
+    this.addScore(- this.score);
+};
+
 
 // Function that return a random speed between -90 and 90
 function randomAdditionalSpeed(){
@@ -121,6 +140,8 @@ var allEnemies = [e1, e2, e3];
 var player = new Player(200, 390);
 console.log(player);
 
+// Add the score to the game
+scoreContainer.textContent =''+player.score;
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
