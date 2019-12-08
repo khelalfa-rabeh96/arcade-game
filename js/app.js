@@ -30,9 +30,14 @@ Enemy.prototype.update = function(dt) {
     // Reset the player postion when he collides with a player
     if((player.x -60 <= this.x &&  this.x <= player.x+60 ) && (player.y -60 <= this.y &&  this.y <= player.y+60)){            
             
-            player.resetScore();
+            
             player.resetPosition();
             player.addLife(-1);
+
+            if(player.lives === 0){
+                player.gameOver();
+            }
+            player.resetScore();
 
     }
 };
@@ -59,6 +64,7 @@ Player = function(posX, posY){
     this.currentCharacterIndex = 0;
     this.sprite = this.characters[this.currentCharacterIndex];
     this.lives = 3;
+    this.loseGame = false;
 
 }
 
@@ -141,6 +147,14 @@ Player.prototype.changeCharacter = function() {
 Player.prototype.addLife = function(nbr) {
     this.lives += nbr;
     livesContainer.textContent = ''+this.lives;
+};
+
+Player.prototype.gameOver = function() {
+    this.loseGame = false;
+    alert('You losed the Game\n Your Score : '+ this.score);
+    this.resetPosition();
+    this.resetScore();
+    this.addLife(3);
 };
 
 // Function that return a random speed between -90 and 90
