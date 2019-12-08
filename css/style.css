@@ -9,9 +9,18 @@ body {
     position: absolute;
     left:30px;
     top:50px;
+    text-align: left;
 }
 
 #scoreLives #score{
     font-weight: bold;
     color: #e63737;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+#scoreLives #lives{
+    font-weight: bold;
+    color: green;
 }

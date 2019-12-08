@@ -1,5 +1,6 @@
 // Enemies our player must avoid
-var scoreContainer = document.getElementById('score');
+var scoreContainer = document.getElementById('score'),
+    livesContainer = document.getElementById('lives');
 var Enemy = function(posX, posY, speed) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
@@ -27,16 +28,13 @@ Enemy.prototype.update = function(dt) {
     }
 
     // Reset the player postion when he collides with a player
-    if((player.x -60 <= this.x &&  this.x <= player.x+60 ) && (player.y -60 <= this.y &&  this.y <= player.y+60)){
-        
-        setTimeout(function(){
-            player.resetPosition();
+    if((player.x -60 <= this.x &&  this.x <= player.x+60 ) && (player.y -60 <= this.y &&  this.y <= player.y+60)){            
+            
             player.resetScore();
-        }, 200);
-    }
-   
+            player.resetPosition();
+            player.addLife(-1);
 
-   
+    }
 };
 
 // Draw the enemy on the screen, required method for game
@@ -60,6 +58,7 @@ Player = function(posX, posY){
                        'images/char-princess-girl.png'];
     this.currentCharacterIndex = 0;
     this.sprite = this.characters[this.currentCharacterIndex];
+    this.lives = 3;
 
 }
 
@@ -139,6 +138,10 @@ Player.prototype.changeCharacter = function() {
     this.sprite = this.characters[this.currentCharacterIndex];
 };
 
+Player.prototype.addLife = function(nbr) {
+    this.lives += nbr;
+    livesContainer.textContent = ''+this.lives;
+};
 
 // Function that return a random speed between -90 and 90
 function randomAdditionalSpeed(){
@@ -167,6 +170,7 @@ console.log(player);
 
 // Add the score to the game
 scoreContainer.textContent =''+player.score;
+livesContainer.textContent =''+player.lives;
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
