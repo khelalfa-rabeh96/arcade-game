@@ -8,7 +8,7 @@ var Enemy = function(posX, posY, speed) {
     this.sprite = 'images/enemy-bug.png';
     this.x = posX;
     this.y = posY;
-    this.speed = speed;
+    this.speed = speed + randomAdditionalSpeed();
 };
 
 
@@ -22,7 +22,9 @@ Enemy.prototype.update = function(dt) {
 
     if(this.x > 550){
         this.x = -140;
+        this.speed  = 300 + randomAdditionalSpeed();
         console.log("Out of the box");
+        console.log(this.speed);
     }
 
     // Reset the player postion when he collides with a player
@@ -30,7 +32,7 @@ Enemy.prototype.update = function(dt) {
         
         setTimeout(function(){
             player.resetPosition();
-        }, 100);
+        }, 200);
     }
    
 
@@ -97,12 +99,23 @@ Player.prototype.resetPosition = function(){
     this.y = 400;
 } 
 
+// Function that return a random speed between -90 and 90
+function randomAdditionalSpeed(){
+    var increaseOrDecrease = "-+",
+        speedStatus = increaseOrDecrease[Math.floor(Math.random() * increaseOrDecrease.length)];
+        randomSpeed = -Math.floor(Math.random()*10)*15;
+        extraSpeed =  speedStatus === '-' ? -randomSpeed : randomSpeed;
+
+    return extraSpeed;
+    
+}
+
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-var e1 = new Enemy(10, 58, 200),
-    e2 = new Enemy(10, 141, 200),
-    e3 = new Enemy(10, 224, 200);
+var e1 = new Enemy(-140, 58, 300),
+    e2 = new Enemy(-140, 141, 300),
+    e3 = new Enemy(-140, 224, 300);
 var allEnemies = [e1, e2, e3];
 
 var player = new Player(200, 390);
