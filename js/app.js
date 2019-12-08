@@ -90,7 +90,7 @@ Player.prototype.handleInput = function(keyup){
         
         this.x += 101;
         
-        if(this.x === 402){
+        if(this.x === 402 && this.y === 390){
             setTimeout(function(){
                 player.changeCharacter();
             },200);
@@ -120,6 +120,12 @@ Player.prototype.handleInput = function(keyup){
 
      if(keyup == 'down' && this.y < 370){
         this.y += 83;
+        
+        if(this.x === 402 && this.y === 390){
+            setTimeout(function(){
+                player.changeCharacter();
+            },200);
+        }
     }
 
 };
