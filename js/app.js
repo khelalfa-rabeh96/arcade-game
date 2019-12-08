@@ -50,11 +50,17 @@ Enemy.prototype.render = function() {
 
 // Player Class
 Player = function(posX, posY){
-    this.sprite = 'images/char-boy.png';
+    
     this.x = posX;
     this.y = posY;
     this.maxUp = posY;
     this.score = 0;
+    this.characters = ['images/char-boy.png', 'images/char-cat-girl.png',
+                       'images/char-pink-girl.png', 'images/char-horn-girl.png',
+                       'images/char-princess-girl.png'];
+    this.currentCharacterIndex = 0;
+    this.sprite = this.characters[this.currentCharacterIndex];
+
 }
 
 
@@ -81,13 +87,19 @@ Player.prototype.handleInput = function(keyup){
     }
 
     if(keyup == 'right' && this.x < 305){
+        
         this.x += 101;
+        
+        if(this.x === 402){
+            setTimeout(function(){
+                player.changeCharacter();
+            },200);
+        }
     }
 
     if(keyup == 'up' && this.y > 0){
         this.y -= 83;
-        console.log(this.y);
-        console.log(this.maxUp);
+        
         if(this.y <= 224 && this.y < this.maxUp){
            player.addScore(10);
            this.maxUp = this.y; 
@@ -117,6 +129,16 @@ Player.prototype.resetScore = function() {
     this.addScore(- this.score);
 };
 
+Player.prototype.changeCharacter = function() {
+    if(this.currentCharacterIndex === 4){
+        this.currentCharacterIndex = 0;
+
+    }else{
+        this.currentCharacterIndex +=1;
+    }
+    this.sprite = this.characters[this.currentCharacterIndex];
+};
+
 
 // Function that return a random speed between -90 and 90
 function randomAdditionalSpeed(){
@@ -132,6 +154,9 @@ function randomAdditionalSpeed(){
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
+
+
+//console.log("ctx is : " + ctx);
 var e1 = new Enemy(-140, 58, 300),
     e2 = new Enemy(-140, 141, 300),
     e3 = new Enemy(-140, 224, 300);
