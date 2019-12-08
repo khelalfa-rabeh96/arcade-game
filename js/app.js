@@ -57,6 +57,7 @@ Player = function(posX, posY){
     this.x = posX;
     this.y = posY;
     this.maxUp = posY;
+    this.previousScore = 0;
     this.score = 0;
     this.characters = ['images/char-boy.png', 'images/char-cat-girl.png',
                        'images/char-pink-girl.png', 'images/char-horn-girl.png',
@@ -70,14 +71,8 @@ Player = function(posX, posY){
 
 
 Player.prototype.update = function() {
-    // If the player reach to the water reset it's position
-    if(this.y <= -15){
-        var $this = this;
-        setTimeout(function(){
-            $this.resetPosition();
-        }, 400);
-        
-    }
+    
+    
 };
 
 // Draw the player on the screen
@@ -109,7 +104,18 @@ Player.prototype.handleInput = function(keyup){
            player.addScore(10);
            this.maxUp = this.y; 
         }
-        
+
+        // If the player reach to the water reset it's position
+        if(this.y <= -15){
+            var $this = this;
+            setTimeout(function(){
+                $this.resetPosition();
+                $this.previousScore = $this.score;
+            }, 400);
+            
+            
+        }
+
     }
 
      if(keyup == 'down' && this.y < 370){
@@ -131,7 +137,8 @@ Player.prototype.addScore = function(someScore) {
 };
 
 Player.prototype.resetScore = function() {
-    this.addScore(- this.score);
+    this.score =   this.previousScore;
+    scoreContainer.textContent = ''+ this.score;
 };
 
 Player.prototype.changeCharacter = function() {
